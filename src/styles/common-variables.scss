@@ -1,0 +1,14 @@
+$default-planet-size: 6rem;
+$default-planet-color: rgb(252, 212, 64);
+$default-satellite-color: rgb(0, 0, 255);
+
+$background-color: rgb(60, 70, 80);
+$tilt-x: 75deg;
+$tilt-y: -30deg;
+$satellite-step: 0.75rem;
+$orbit-base: 5rem;
+$orbit-step: 7rem;
+$speed-base: 2.5s;
+$speed-step: 3s;
+$max-orbits: 10;
+$satellite-sizes: 3;

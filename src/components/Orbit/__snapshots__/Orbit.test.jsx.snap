@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Orbit component renders correctly with alternate props 1`] = `
+<div
+  className="orbit orbit-2"
+/>
+`;
+
+exports[`Orbit component renders correctly with default props 1`] = `
+<div
+  className="orbit orbit-1"
+/>
+`;

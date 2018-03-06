@@ -28,6 +28,7 @@
     ]
   },
   "devDependencies": {
+    "classnames": "^2.2.5",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
     "node-sass-chokidar": "^0.0.3",
@@ -35,8 +36,10 @@
     "prettier": "^1.11.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
+    "react-color": "^2.14.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "react-test-renderer": "^16.2.0"
   },
   "scripts": {
     "start": "npm run copy-version && npm-run-all -p watch-css start-js",

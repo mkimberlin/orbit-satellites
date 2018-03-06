@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Planet component renders correctly with alternate props 1`] = `
+<div
+  className="planet"
+/>
+`;
+
+exports[`Planet component renders correctly with default props 1`] = `
+<div
+  className="planet"
+/>
+`;

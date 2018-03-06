@@ -1,0 +1,38 @@
+@import '../../styles/common-variables.scss';
+@import '../../styles/animations.scss';
+@import '../../styles/common-variables.scss';
+
+@include keyframe(orbit) {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 2px solid black;
+  border-radius: 50%;
+  transform-style: preserve-3d;
+
+  @for $orbit from 1 through $max-orbits {
+    &.orbit-#{$orbit} {
+      width: calc(#{$orbit-base} + (#{$orbit-step} * #{$orbit}));
+      height: calc(#{$orbit-base} + (#{$orbit-step} * #{$orbit}));
+      margin-top: calc(
+        -1 * (#{$orbit-base} + (#{$orbit-step} * #{$orbit})) / 2
+      );
+      margin-left: calc(
+        -1 * (#{$orbit-base} + (#{$orbit-step} * #{$orbit})) / 2
+      );
+      @include animation(
+        calc(#{$speed-base} + (#{$speed-step} * #{$orbit - 1})),
+        orbit
+      );
+    }
+  }
+}

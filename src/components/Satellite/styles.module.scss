@@ -1,0 +1,26 @@
+@import './orbit-adjustment.scss';
+
+.satellite {
+  background-color: rgba($default-satellite-color, 0.8);
+  box-shadow: 0 0 1rem rgba($default-satellite-color, 0.8);
+  border-radius: 50%;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+
+  @for $orbit from 1 through $max-orbits {
+    @for $satellite-size from 1 through $satellite-sizes {
+      &.satellite-#{$orbit}-#{$satellite-size} {
+        width: $satellite-size * $satellite-step;
+        height: $satellite-size * $satellite-step;
+        line-height: $satellite-size * $satellite-step;
+        @include animation(
+          calc(#{$speed-base} + (#{$speed-step} * #{$orbit - 1})),
+          invert-orbit-#{$orbit}-#{$satellite-size}
+        );
+      }
+    }
+  }
+}

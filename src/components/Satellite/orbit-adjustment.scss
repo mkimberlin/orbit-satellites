@@ -1,0 +1,43 @@
+@import '../../styles/animations.scss';
+@import '../../styles/common-variables.scss';
+
+@mixin orbit-adjustment(
+  $orbit,
+  $satellite-size,
+  $tilt-x: $tilt-x,
+  $tilt-y: $tilt-y,
+  $orbit-base: $orbit-base,
+  $orbit-step: $orbit-step,
+  $satellite-step: $satellite-step
+) {
+  $orbit-size: $orbit-base + ($orbit * $orbit-step);
+  $satellite-computed-size: $satellite-size * $satellite-step;
+  $satellite-shift: ($orbit-size / 2) - ($satellite-computed-size / 2);
+
+  @include keyframe(invert-orbit-#{$orbit}-#{$satellite-size}) {
+    0% {
+      transform: translate(#{$satellite-shift}) rotateZ(360deg)
+        rotateY(calc(#{$tilt-y} * -1)) rotateX(calc(#{$tilt-x} * -1));
+    }
+
+    100% {
+      transform: translate(#{$satellite-shift}) rotateZ(0deg)
+        rotateY(calc(#{$tilt-y} * -1)) rotateX(calc(#{$tilt-x} * -1));
+    }
+  }
+}
+
+@mixin generate-orbit-adjustments(
+  $tilt-x: $tilt-x,
+  $tilt-y: $tilt-y,
+  $max-orbits: $max-orbits,
+  $satellite-sizes: $satellite-sizes
+) {
+  @for $orbit from 1 through $max-orbits {
+    @for $satellite-size from 1 through $satellite-sizes {
+      @include orbit-adjustment($orbit, $satellite-size, $tilt-x, $tilt-y);
+    }
+  }
+}
+
+@include generate-orbit-adjustments();
