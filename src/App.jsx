@@ -9,21 +9,11 @@ class App extends Component {
       <div className="system-container">
         <div className="system">
           <Planet />
-          <Orbit>
-            <Satellite />
-          </Orbit>
-          <Orbit position={2}>
-            <Satellite orbit={2} />
-          </Orbit>
-          <Orbit position={3}>
-            <Satellite orbit={3} />
-          </Orbit>
-          <Orbit position={4}>
-            <Satellite orbit={4} />
-          </Orbit>
-          <Orbit position={5}>
-            <Satellite orbit={5} />
-          </Orbit>
+          {[1, 2, 3, 4, 5, 6, 7, 8].map(position => (
+            <Orbit position={position}>
+              <Satellite orbit={position} />
+            </Orbit>
+          ))}
         </div>
       </div>
     );
