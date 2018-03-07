@@ -8,7 +8,20 @@ const propTypes = {
   size: PropTypes.oneOf(['small', 'medium', 'large'])
 };
 
-const Planet = ({ color, size = 'medium' }) => <div className="planet" />;
+const Planet = ({ color, size = 'medium' }) => (
+  <div
+    className="planet"
+    style={
+      color
+        ? {
+            backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${
+              color.a
+            })`
+          }
+        : {}
+    }
+  />
+);
 
 Planet.displayName = displayName;
 Planet.propTypes = propTypes;

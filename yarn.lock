@@ -16,6 +16,36 @@
     esutils "^2.0.2"
     js-tokens "^3.0.0"
 
+"@orbit/core@^0.15.10":
+  version "0.15.10"
+  resolved "https://registry.yarnpkg.com/@orbit/core/-/core-0.15.10.tgz#c5dc7bbb98c1653e17934983ac92af0549cf81ee"
+  dependencies:
+    "@orbit/utils" "^0.15.7"
+
+"@orbit/data@^0.15.10":
+  version "0.15.10"
+  resolved "https://registry.yarnpkg.com/@orbit/data/-/data-0.15.10.tgz#0445015317e78402453dde3ce37d77bbf3dd6881"
+  dependencies:
+    "@orbit/core" "^0.15.10"
+    "@orbit/utils" "^0.15.7"
+
+"@orbit/immutable@^0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@orbit/immutable/-/immutable-0.15.0.tgz#c4009dd41a8fb2b560e9e3e276ee2fc43d60a7e3"
+
+"@orbit/store@^0.15.10":
+  version "0.15.10"
+  resolved "https://registry.yarnpkg.com/@orbit/store/-/store-0.15.10.tgz#4e854e3d09ea567b184b419d1cc3e92dfed609c8"
+  dependencies:
+    "@orbit/core" "^0.15.10"
+    "@orbit/data" "^0.15.10"
+    "@orbit/immutable" "^0.15.0"
+    "@orbit/utils" "^0.15.7"
+
+"@orbit/utils@^0.15.7":
+  version "0.15.7"
+  resolved "https://registry.yarnpkg.com/@orbit/utils/-/utils-0.15.7.tgz#fe68da9f1f90e6be4a1ac149e5860dd78a30da38"
+
 abab@^1.0.3, abab@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -3377,6 +3407,10 @@ hoek@4.x.x:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.1.tgz#9634502aa12c445dd5a7c5734b572bb8738aacbb"
 
+hoist-non-react-statics@^2.3.1:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.0.tgz#d2ca2dfc19c5a91c5a6615ce8e564ef0347e2a40"
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -6268,6 +6302,13 @@ react-dom@^16.2.0:
 react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
+
+react-orbitjs@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/react-orbitjs/-/react-orbitjs-0.1.6.tgz#c6f793b7b907bd3780b719b43aa0ee0edc9f0acc"
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+    prop-types "^15.6.0"
 
 react-scripts@1.1.1:
   version "1.1.1"
