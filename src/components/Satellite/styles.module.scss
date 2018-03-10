@@ -11,7 +11,7 @@
   transform-style: preserve-3d;
 
   @for $orbit from 1 through $max-orbits {
-    @for $satellite-size from 1 through $satellite-sizes {
+    @for $satellite-size from 1 through $object-sizes {
       &.satellite-#{$orbit}-#{$satellite-size} {
         width: $satellite-size * $satellite-step;
         height: $satellite-size * $satellite-step;

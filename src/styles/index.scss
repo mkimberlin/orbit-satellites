@@ -1,7 +1,7 @@
 @import './common-variables.scss';
 
 body {
-  font-family: sans-serif;
+  font-family: Helvetica, sans-serif;
   background-color: white;
   margin: 0;
   overflow: hidden;
@@ -28,15 +28,55 @@ body {
   transform-style: preserve-3d;
 }
 
-.settings {
-  position: absolute;
+.settings-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-100%, -50%);
   width: 225px;
-  height: 300px;
-  background-color: rgb(210, 210, 210);
+  height: max-content;
+  background-color: $dialog-background-color;
   border: gainsboro 3px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
-  padding: 5px;
-  display: flex;
+  padding: 6px;
+  display: none;
+  text-align: center;
+
+  .settings-title {
+    font-weight: bold;
+  }
+
+  .dialog-close {
+    float: right;
+    margin-top: -12px;
+    margin-right: -12px;
+    cursor: pointer;
+    color: #fff;
+    border: 1px solid #aeaeae;
+    border-radius: 50%;
+    background-color: $close-color;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0;
+    padding: 0.5rem 3px;
+
+    &:before {
+      content: 'X';
+    }
+  }
+
+  .setting {
+    display: inline-flex;
+    width: 100%;
+    margin: 3px 0px;
+
+    label {
+      width: 3rem;
+    }
+    input {
+      width: calc(100% - 3rem);
+    }
+  }
 }

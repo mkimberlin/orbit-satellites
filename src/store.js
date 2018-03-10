@@ -5,29 +5,27 @@ const schemaDefinition = {
   models: {
     planet: {
       attributes: {
+        label: 'string',
+        size: 'number',
         color: {
           r: { type: 'number' },
           g: { type: 'number' },
           b: { type: 'number' },
           a: { type: 'number' }
-        },
-        size: 'string'
+        }
       }
     },
     satellite: {
       attributes: {
+        label: 'string',
+        orbit: 'number',
+        size: 'number',
         color: {
           r: { type: 'number' },
           g: { type: 'number' },
           b: { type: 'number' },
           a: { type: 'number' }
-        },
-        size: 'string'
-      }
-    },
-    orbit: {
-      attributes: {
-        position: { type: 'number' }
+        }
       }
     }
   }

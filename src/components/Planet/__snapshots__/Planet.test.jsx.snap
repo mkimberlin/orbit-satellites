@@ -2,12 +2,28 @@
 
 exports[`Planet component renders correctly with alternate props 1`] = `
 <div
-  className="planet"
+  className="planet planet-3"
+  id="planet"
+  onClick={[Function]}
+  style={
+    Object {
+      "backgroundColor": "rgba(255, 205, 155, 0.5)",
+      "boxShadow": "0 0 1rem rgba(255, 205, 155, 0.5)",
+    }
+  }
 />
 `;
 
 exports[`Planet component renders correctly with default props 1`] = `
 <div
-  className="planet"
+  className="planet planet-2"
+  id="planet"
+  onClick={undefined}
+  style={
+    Object {
+      "backgroundColor": undefined,
+      "boxShadow": undefined,
+    }
+  }
 />
 `;

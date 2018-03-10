@@ -5,16 +5,33 @@ import './styles.module.css';
 
 const displayName = 'Satellite';
 const propTypes = {
-  color: PropTypes.string,
+  color: PropTypes.shape({
+    r: PropTypes.number,
+    g: PropTypes.number,
+    b: PropTypes.number,
+    a: PropTypes.number
+  }),
   orbit: PropTypes.number,
-  size: PropTypes.oneOf(['small', 'medium', 'large'])
+  size: PropTypes.oneOf([1, 2, 3])
 };
 
-const sizes = { small: 1, medium: 2, large: 3 };
+const Satellite = ({ color, orbit = 1, size = 1 }) => {
+  const styles = {
+    backgroundColor: color
+      ? `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+      : undefined,
+    boxShadow: color
+      ? `0 0 1rem rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+      : undefined
+  };
 
-const Satellite = ({ color, orbit = 1, size = 'medium' }) => (
-  <div className={cx('satellite', `satellite-${orbit}-${sizes[size]}`)} />
-);
+  return (
+    <div
+      style={styles}
+      className={cx('satellite', `satellite-${orbit}-${size}`)}
+    />
+  );
+};
 
 Satellite.displayName = displayName;
 Satellite.propTypes = propTypes;

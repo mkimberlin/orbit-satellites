@@ -7,6 +7,10 @@ describe('Orbit component', () => {
   });
 
   it('renders correctly with alternate props', () => {
-    snapshot(<Orbit position={2} />);
+    snapshot(
+      <Orbit position={2} onClick={jest.fn()}>
+        <div>Stuff</div>
+      </Orbit>
+    );
   });
 });

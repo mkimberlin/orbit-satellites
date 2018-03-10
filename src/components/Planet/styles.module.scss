@@ -1,12 +1,6 @@
 @import '../../styles/common-variables.scss';
 
 .planet {
-  width: $default-planet-size;
-  height: $default-planet-size;
-  line-height: $default-planet-size;
-  top: calc(50vh - (#{$default-planet-size / 2})); // todo: 50% instead?
-  left: calc(50vw - (#{$default-planet-size / 2})); // todo: 50% instead?
-
   text-align: center;
   color: white;
   background-color: rgba($default-planet-color, 0.7);
@@ -16,4 +10,15 @@
 
   -webkit-transform: rotateY($tilt-y * -1) rotateX($tilt-x * -1);
   transform: rotateY($tilt-y * -1) rotateX($tilt-x * -1);
+
+  @for $planet-size from 1 through $object-sizes {
+    &.planet-#{$planet-size} {
+      $calculated-size: $planet-size * $planet-step;
+      width: $calculated-size;
+      height: $calculated-size;
+      line-height: $calculated-size;
+      top: calc(50vh - (#{$calculated-size / 2}));
+      left: calc(50vw - (#{$calculated-size / 2}));
+    }
+  }
 }

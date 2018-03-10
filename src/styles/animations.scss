@@ -1,4 +1,4 @@
-@mixin keyframe ($animation_name) {
+@mixin keyframe($animation_name) {
   @-webkit-keyframes #{$animation_name} {
     @content;
   }
@@ -12,22 +12,19 @@
   }
 }
 
-@mixin animation ($duration, $animation) {
+@mixin animation($duration, $animation) {
   -webkit-animation-duration: $duration;
   -webkit-animation-name: $animation;
   -webkit-animation-iteration-count: infinite;
-  -webkit-animation-fill-mode: forwards;
   -webkit-animation-timing-function: linear;
 
   -moz-animation-duration: $duration;
   -moz-animation-name: $animation;
   -moz-animation-iteration-count: infinite;
-  -moz-animation-fill-mode: forwards;
   -moz-animation-timing-function: linear;
 
   animation-duration: $duration;
   animation-name: $animation;
   animation-iteration-count: infinite;
-  animation-fill-mode: forwards;
   animation-timing-function: linear;
 }

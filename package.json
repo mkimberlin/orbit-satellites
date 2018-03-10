@@ -22,28 +22,27 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
+    "src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
   },
   "devDependencies": {
-    "@orbit/core": "^0.15.10",
-    "@orbit/data": "^0.15.10",
-    "@orbit/store": "^0.15.10",
-    "classnames": "^2.2.5",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.2",
     "prettier": "^1.11.1",
+    "react-scripts": "1.1.1",
+    "react-test-renderer": "^16.2.0"
+  },
+  "dependencies": {
+    "@orbit/core": "^0.15.10",
+    "@orbit/data": "^0.15.10",
+    "@orbit/store": "^0.15.10",
+    "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-color": "^2.14.0",
     "react-dom": "^16.2.0",
-    "react-orbitjs": "^0.1.6",
-    "react-scripts": "1.1.1",
-    "react-test-renderer": "^16.2.0"
+    "react-orbitjs": "^0.1.6"
   },
   "scripts": {
     "start": "npm run copy-version && npm-run-all -p watch-css start-js",
@@ -51,10 +50,12 @@
     "copy-version": "node version.js",
     "build": "npm run build-css && npm run copy-version && react-scripts build",
     "coverage": "npm test -- --coverage",
-    "test": "npm run build-css && npm run copy-version && react-scripts test --env=jsdom",
+    "test":
+      "npm run build-css && npm run copy-version && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start"
   }
 }

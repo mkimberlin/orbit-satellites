@@ -31,7 +31,7 @@
   $tilt-x: $tilt-x,
   $tilt-y: $tilt-y,
   $max-orbits: $max-orbits,
-  $satellite-sizes: $satellite-sizes
+  $satellite-sizes: $object-sizes
 ) {
   @for $orbit from 1 through $max-orbits {
     @for $satellite-size from 1 through $satellite-sizes {

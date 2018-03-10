@@ -1,16 +1,15 @@
 import React from 'react';
-import SatelliteSettings from './SatelliteSettings';
+import PlanetSettings from './PlanetSettings';
 
-describe('SatelliteSettings component', () => {
+describe('PlanetSettings component', () => {
   it('renders correctly with default props', () => {
-    snapshot(<SatelliteSettings />);
+    snapshot(<PlanetSettings />);
   });
 
   it('renders correctly with alternate props', () => {
     snapshot(
-      <SatelliteSettings
+      <PlanetSettings
         color={{ r: 100, g: 50, b: 150, a: 0.7 }}
-        orbit={2}
         size={3}
         visible
         onClose={jest.fn()}

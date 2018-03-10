@@ -5,11 +5,18 @@ import './styles.module.css';
 
 const displayName = 'Orbit';
 const propTypes = {
-  position: PropTypes.number
+  position: PropTypes.number,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]),
+  onClick: PropTypes.func
 };
 
-const Orbit = ({ children, position = 1 }) => (
-  <div className={cx('orbit', `orbit-${position}`)}>{children}</div>
+const Orbit = ({ children, position = 1, onClick }) => (
+  <div className={cx('orbit', `orbit-${position}`)} onClick={onClick}>
+    {children}
+  </div>
 );
 
 Orbit.displayName = displayName;

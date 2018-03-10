@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SatelliteSettings component renders correctly with alternate props 1`] = `
+exports[`PlanetSettings component renders correctly with alternate props 1`] = `
 <div
   className="settings-dialog"
   style={
@@ -16,18 +16,18 @@ exports[`SatelliteSettings component renders correctly with alternate props 1`] 
   <div
     className="settings-title"
   >
-    Satellite Settings
+    Planet Settings
   </div>
   <div
     className="setting"
   >
     <label
-      htmlFor="satellite-size"
+      htmlFor="planet-size"
     >
       Size:
     </label>
     <input
-      id="satellite-size"
+      id="planet-size"
       max="3"
       min="1"
       onChange={[Function]}
@@ -837,7 +837,7 @@ exports[`SatelliteSettings component renders correctly with alternate props 1`] 
 </div>
 `;
 
-exports[`SatelliteSettings component renders correctly with default props 1`] = `
+exports[`PlanetSettings component renders correctly with default props 1`] = `
 <div
   className="settings-dialog"
   style={
@@ -853,24 +853,24 @@ exports[`SatelliteSettings component renders correctly with default props 1`] = 
   <div
     className="settings-title"
   >
-    Satellite Settings
+    Planet Settings
   </div>
   <div
     className="setting"
   >
     <label
-      htmlFor="satellite-size"
+      htmlFor="planet-size"
     >
       Size:
     </label>
     <input
-      id="satellite-size"
+      id="planet-size"
       max="3"
       min="1"
       onChange={[Function]}
       step="1"
       type="range"
-      value={1}
+      value={2}
     />
   </div>
   <div
