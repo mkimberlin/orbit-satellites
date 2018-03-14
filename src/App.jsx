@@ -10,23 +10,34 @@ import PlanetSettings from './components/PlanetSettings/PlanetSettings';
 class System extends Component {
   state = {
     showSatelliteSettings: false,
-    showPlanetSettings: false
+    showPlanetSettings: false,
+    settingsX: '50%',
+    settingsY: '50%'
   };
 
   openSettings = e => {
     if (this.state.showPlanetSettings || this.state.showSatelliteSettings)
       return;
 
-    if (!this.isOverPlanet(e.clientX, e.clientY)) {
-      this.setState({
-        ...this.state,
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    this.setState(state => ({
+      ...state,
+      settingsX: clientX,
+      settingsY: clientY
+    }));
+
+    if (!this.isOverPlanet(clientX, clientY)) {
+      this.setState(state => ({
+        ...state,
         showSatelliteSettings: true
-      });
+      }));
     } else {
-      this.setState({
-        ...this.state,
+      this.setState(state => ({
+        ...state,
         showPlanetSettings: true
-      });
+      }));
     }
   };
 
@@ -56,6 +67,7 @@ class System extends Component {
         <div className="system-container" onClick={this.openSettings}>
           <div className="system">
             <Planet
+              label={planets[0] && planets[0].attributes.label}
               color={planets[0] && planets[0].attributes.color}
               size={planets[0] && planets[0].attributes.size}
             />
@@ -65,6 +77,7 @@ class System extends Component {
                 position={satellite.attributes.orbit}
               >
                 <Satellite
+                  label={satellite.attributes.label}
                   orbit={satellite.attributes.orbit}
                   color={satellite.attributes.color}
                   size={satellite.attributes.size}
@@ -75,14 +88,18 @@ class System extends Component {
         </div>
         <SatelliteSettings
           visible={this.state.showSatelliteSettings}
+          label={satellites[0] && satellites[0].attributes.label}
           color={satellites[0] && satellites[0].attributes.color}
           size={satellites[0] && satellites[0].attributes.size}
+          position={{ x: this.state.settingsX, y: this.state.settingsY }}
           onClose={this.closeSettings}
         />
         <PlanetSettings
           visible={this.state.showPlanetSettings}
+          label={planets[0] && planets[0].attributes.label}
           color={planets[0] && planets[0].attributes.color}
           size={planets[0] && planets[0].attributes.size}
+          position={{ x: this.state.settingsX, y: this.state.settingsY }}
           onClose={this.closeSettings}
         />
       </div>

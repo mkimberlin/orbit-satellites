@@ -13,6 +13,10 @@ const propTypes = {
     a: PropTypes.number
   }),
   orbit: PropTypes.number,
+  position: PropTypes.shape({
+    x: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    y: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  }),
   size: PropTypes.oneOf([1, 2, 3]),
   visible: PropTypes.bool,
   onClose: PropTypes.func
@@ -22,6 +26,13 @@ const updateColor = (color, e) => {
   e.stopPropagation();
   const satellite = store.cache.query(q => q.findRecords('satellite'))[0];
   satellite.attributes.color = color.rgb;
+  store.update(t => t.addRecord(satellite));
+};
+
+const updateName = e => {
+  e.stopPropagation();
+  const satellite = store.cache.query(q => q.findRecords('satellite'))[0];
+  satellite.attributes.label = e.target.value;
   store.update(t => t.addRecord(satellite));
 };
 
@@ -47,14 +58,28 @@ const updateSize = orbit => e => {
 
 const SatelliteSettings = ({
   color,
+  label,
   orbit = 1,
+  position,
   size = 1,
   visible = false,
   onClose
 }) => (
-  <div className="settings-dialog" style={{ display: visible && 'block' }}>
+  <div
+    className="settings-dialog"
+    style={{ display: visible && 'block', top: position.y, left: position.x }}
+  >
     <div className="dialog-close" onClick={onClose} />
     <div className="settings-title">Satellite Settings</div>
+    <div className="setting">
+      <label htmlFor="satellite-name">Name:</label>
+      <input
+        type="text"
+        value={label}
+        id="satellite-name"
+        onChange={updateName}
+      />
+    </div>
     <div className="setting">
       <label htmlFor="satellite-size">Size:</label>
       <input

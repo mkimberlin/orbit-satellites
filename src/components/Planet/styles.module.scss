@@ -7,6 +7,8 @@
   position: absolute;
   border-radius: 50%;
   box-shadow: 0 0 1rem rgba($default-planet-color, 0.7);
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   -webkit-transform: rotateY($tilt-y * -1) rotateX($tilt-x * -1);
   transform: rotateY($tilt-y * -1) rotateX($tilt-x * -1);

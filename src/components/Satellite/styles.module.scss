@@ -9,6 +9,8 @@
   top: 50%;
   left: 50%;
   transform-style: preserve-3d;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   @for $orbit from 1 through $max-orbits {
     @for $satellite-size from 1 through $object-sizes {
