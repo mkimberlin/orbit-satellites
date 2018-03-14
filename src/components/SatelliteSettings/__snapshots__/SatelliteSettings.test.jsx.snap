@@ -6,6 +6,8 @@ exports[`SatelliteSettings component renders correctly with alternate props 1`] 
   style={
     Object {
       "display": "block",
+      "left": undefined,
+      "top": undefined,
     }
   }
 >
@@ -17,6 +19,21 @@ exports[`SatelliteSettings component renders correctly with alternate props 1`] 
     className="settings-title"
   >
     Satellite Settings
+  </div>
+  <div
+    className="setting"
+  >
+    <label
+      htmlFor="satellite-name"
+    >
+      Name:
+    </label>
+    <input
+      id="satellite-name"
+      onChange={[Function]}
+      type="text"
+      value={undefined}
+    />
   </div>
   <div
     className="setting"
@@ -843,6 +860,8 @@ exports[`SatelliteSettings component renders correctly with default props 1`] = 
   style={
     Object {
       "display": false,
+      "left": undefined,
+      "top": undefined,
     }
   }
 >
@@ -854,6 +873,21 @@ exports[`SatelliteSettings component renders correctly with default props 1`] = 
     className="settings-title"
   >
     Satellite Settings
+  </div>
+  <div
+    className="setting"
+  >
+    <label
+      htmlFor="satellite-name"
+    >
+      Name:
+    </label>
+    <input
+      id="satellite-name"
+      onChange={[Function]}
+      type="text"
+      value={undefined}
+    />
   </div>
   <div
     className="setting"

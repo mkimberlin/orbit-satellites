@@ -60,7 +60,7 @@ const SatelliteSettings = ({
   color,
   label,
   orbit = 1,
-  position,
+  position = {},
   size = 1,
   visible = false,
   onClose

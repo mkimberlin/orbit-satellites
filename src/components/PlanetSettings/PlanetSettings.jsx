@@ -45,7 +45,7 @@ const updateName = e => {
 const PlanetSettings = ({
   color,
   label,
-  position,
+  position = {},
   size = 2,
   visible = false,
   onClose
