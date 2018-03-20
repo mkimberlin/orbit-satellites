@@ -7,17 +7,23 @@ import './styles.module.css';
 const displayName = 'PlanetSettings';
 const propTypes = {
   planet: PropTypes.shape({
-    label: PropTypes.string,
-    color: PropTypes.shape({
-      r: PropTypes.number,
-      g: PropTypes.number,
-      b: PropTypes.number,
-      a: PropTypes.number
-    }),
-    size: PropTypes.oneOf([1, 2, 3])
+    attributes: PropTypes.shape({
+      label: PropTypes.string,
+      color: PropTypes.shape({
+        r: PropTypes.number,
+        g: PropTypes.number,
+        b: PropTypes.number,
+        a: PropTypes.number
+      }),
+      size: PropTypes.oneOf([1, 2, 3])
+    })
+  }),
+  position: PropTypes.shape({
+    x: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    y: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired
   }),
   visible: PropTypes.bool,
-  onClose: PropTypes.func
+  onClose: PropTypes.func.isRequired
 };
 
 const updateColor = (color, e) => {
@@ -42,7 +48,7 @@ const updateName = e => {
 };
 
 const PlanetSettings = ({
-  planet,
+  planet = { attributes: {} },
   position = {},
   visible = false,
   onClose

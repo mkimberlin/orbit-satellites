@@ -44,7 +44,7 @@ const restartAnimation = (orbit, size) => () => {
   });
 };
 
-const Satellite = ({ color, label, orbit = 1, size = 1, animating = true }) => {
+const Satellite = ({ color, label, orbit = 1, size = 1, onClick }) => {
   let foreground = '#FFFFFF';
   if (color && color.r * 0.299 + color.g * 0.587 + color.b * 0.114 > 186) {
     foreground = '#000000';
@@ -57,8 +57,7 @@ const Satellite = ({ color, label, orbit = 1, size = 1, animating = true }) => {
     boxShadow: color
       ? `0 0 1rem rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
       : undefined,
-    color: foreground,
-    animation: !animating ? 'none' : undefined
+    color: foreground
   };
 
   return (
@@ -67,6 +66,7 @@ const Satellite = ({ color, label, orbit = 1, size = 1, animating = true }) => {
       className={cx('satellite', `satellite-${orbit}-${size}`)}
       onMouseOver={pauseAnimation(orbit, size)}
       onMouseLeave={restartAnimation(orbit, size)}
+      onClick={onClick}
     >
       <p className="satellite-label">{label}</p>
     </div>

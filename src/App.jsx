@@ -9,18 +9,14 @@ import PlanetSettings from './components/PlanetSettings/PlanetSettings';
 
 class System extends Component {
   state = {
+    selectedOrbit: 1,
     showSatelliteSettings: false,
     showPlanetSettings: false,
     settingsX: '50%',
     settingsY: '50%'
   };
 
-  openSettings = e => {
-    if (this.state.showPlanetSettings || this.state.showSatelliteSettings) {
-      this.closeSettings(e);
-      return;
-    }
-
+  setSettingsPosition = e => {
     const clientX = e.clientX;
     const clientY = e.clientY;
 
@@ -29,27 +25,48 @@ class System extends Component {
       settingsX: clientX,
       settingsY: clientY
     }));
+  };
 
-    if (!this.isOverPlanet(clientX, clientY)) {
+  openSatelliteSettings = selectedOrbit => e => {
+    if (!this.closeSettings(e)) {
+      e.stopPropagation();
+      this.setSettingsPosition(e);
+
       this.setState(state => ({
         ...state,
+        selectedOrbit,
         showSatelliteSettings: true
-      }));
-    } else {
-      this.setState(state => ({
-        ...state,
-        showPlanetSettings: true
       }));
     }
   };
 
+  openPlanetSettings = e => {
+    if (!this.closeSettings(e)) {
+      const clientX = e.clientX;
+      const clientY = e.clientY;
+      if (this.isOverPlanet(clientX, clientY)) {
+        this.setSettingsPosition(e);
+
+        this.setState(state => ({
+          ...state,
+          showPlanetSettings: true
+        }));
+      }
+    }
+  };
+
   closeSettings = e => {
-    e.stopPropagation();
-    this.setState({
-      ...this.state,
-      showPlanetSettings: false,
-      showSatelliteSettings: false
-    });
+    let closed = false;
+    if (this.state.showPlanetSettings || this.state.showSatelliteSettings) {
+      e.stopPropagation();
+      this.setState({
+        ...this.state,
+        showPlanetSettings: false,
+        showSatelliteSettings: false
+      });
+      closed = true;
+    }
+    return closed;
   };
 
   isOverPlanet = (x, y) => {
@@ -64,43 +81,55 @@ class System extends Component {
 
   render() {
     const { planet, satellites } = this.props;
+    const {
+      selectedOrbit,
+      showPlanetSettings,
+      showSatelliteSettings,
+      settingsX,
+      settingsY
+    } = this.state;
+
+    const satellite = satellites.find(
+      satellite => satellite.attributes.orbit === selectedOrbit
+    );
+
     return (
       <div>
-        <div className="system-container" onClick={this.openSettings}>
+        <div className="system-container" onClick={this.openPlanetSettings}>
           <p className="instructions">
-            Click the planet to change its settings or anywhere else to change
-            satellite settings.
+            Click a planet or satellite to change its appearance, or add more
+            satellites.
           </p>
+
           <div className="system">
-            <Planet
-              label={planet.attributes.label}
-              color={planet.attributes.color}
-              size={planet.attributes.size}
-            />
-            {satellites.map(satellite => (
-              <Orbit
-                key={`orbit-${satellite.attributes.orbit}`}
-                position={satellite.attributes.orbit}
-              >
-                <Satellite
-                  label={satellite.attributes.label}
-                  orbit={satellite.attributes.orbit}
-                  color={satellite.attributes.color}
-                  size={satellite.attributes.size}
-                />
-              </Orbit>
-            ))}
+            <Planet {...planet.attributes} onClick={this.openPlanetSettings} />
+
+            {satellites.map(satellite => {
+              const { orbit } = satellite.attributes;
+
+              return (
+                <Orbit key={`orbit-${orbit}`} position={orbit}>
+                  <Satellite
+                    {...satellite.attributes}
+                    onClick={this.openSatelliteSettings(orbit)}
+                  />
+                </Orbit>
+              );
+            })}
           </div>
         </div>
+
         <SatelliteSettings
-          visible={this.state.showSatelliteSettings}
-          position={{ x: this.state.settingsX, y: this.state.settingsY }}
+          satellite={satellite}
+          visible={showSatelliteSettings}
+          position={{ x: settingsX, y: settingsY }}
           onClose={this.closeSettings}
         />
+
         <PlanetSettings
           planet={planet}
-          visible={this.state.showPlanetSettings}
-          position={{ x: this.state.settingsX, y: this.state.settingsY }}
+          visible={showPlanetSettings}
+          position={{ x: settingsX, y: settingsY }}
           onClose={this.closeSettings}
         />
       </div>
