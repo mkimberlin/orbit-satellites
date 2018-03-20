@@ -10,13 +10,13 @@ store.update(t => [
   t.addRecord({
     type: 'planet',
     attributes: {
-      label: 'Earth'
+      label: 'Planet'
     }
   }),
   t.addRecord({
     type: 'satellite',
     attributes: {
-      label: 'Moon',
+      label: '1',
       orbit: 1
     }
   })

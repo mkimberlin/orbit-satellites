@@ -22,7 +22,10 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "devDependencies": {
     "husky": "^0.14.3",
@@ -50,12 +53,10 @@
     "copy-version": "node version.js",
     "build": "npm run build-css && npm run copy-version && react-scripts build",
     "coverage": "npm test -- --coverage",
-    "test":
-      "npm run build-css && npm run copy-version && react-scripts test --env=jsdom",
+    "test": "npm run build-css && npm run copy-version && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css":
-      "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start"
   }
 }

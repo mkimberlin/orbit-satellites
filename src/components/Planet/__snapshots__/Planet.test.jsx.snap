@@ -5,8 +5,6 @@ exports[`Planet component renders correctly with alternate props 1`] = `
   className="planet planet-3"
   id="planet"
   onClick={[Function]}
-  onMouseOut={[Function]}
-  onMouseOver={[Function]}
   style={
     Object {
       "backgroundColor": "rgba(255, 205, 155, 0.5)",
@@ -15,7 +13,15 @@ exports[`Planet component renders correctly with alternate props 1`] = `
     }
   }
 >
-  Saturn
+  <p
+    className="planet-label"
+  >
+    Saturn
+  </p>
+  <div
+    className="add-button"
+    onClick={[Function]}
+  />
 </div>
 `;
 
@@ -24,8 +30,6 @@ exports[`Planet component renders correctly with default props 1`] = `
   className="planet planet-2"
   id="planet"
   onClick={undefined}
-  onMouseOut={[Function]}
-  onMouseOver={[Function]}
   style={
     Object {
       "backgroundColor": undefined,
@@ -33,5 +37,13 @@ exports[`Planet component renders correctly with default props 1`] = `
       "color": "#FFFFFF",
     }
   }
-/>
+>
+  <p
+    className="planet-label"
+  />
+  <div
+    className="add-button"
+    onClick={[Function]}
+  />
+</div>
 `;

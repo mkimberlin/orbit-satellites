@@ -7,6 +7,18 @@ body {
   overflow: hidden;
 }
 
+.instructions {
+  position: absolute;
+  transform: translate(-50%, 3rem);
+  top: -3rem;
+  left: 50%;
+  text-align: center;
+  background-color: $background-color;
+  padding: 1rem;
+  color: white;
+  margin: 0;
+}
+
 .system-container {
   background-color: $background-color;
   padding: 5px;
@@ -70,10 +82,13 @@ body {
     margin: 3px 0px;
 
     label {
-      width: 3rem;
+      width: 4rem;
     }
     input {
-      width: calc(100% - 3rem);
+      width: calc(100% - 4rem);
+    }
+    select {
+      width: calc(100% - 4rem);
     }
   }
 }

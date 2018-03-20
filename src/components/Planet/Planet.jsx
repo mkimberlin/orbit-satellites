@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import './styles.module.css';
+import store from '../../store';
 
 const displayName = 'Planet';
 const propTypes = {
@@ -16,56 +17,57 @@ const propTypes = {
   onClick: PropTypes.func
 };
 
-class Planet extends Component {
-  state = {
-    addSatelliteVisible: false
-  };
+const MAX_SATELLITES = 10;
 
-  showAddSatellite = () => {
-    this.setState(state => ({
-      ...state,
-      addSatelliteVisible: true
-    }));
-  };
+const onAddSatellite = e => {
+  e.stopPropagation();
+  const satellites = store.cache.query(q =>
+    q.findRecords('satellite').sort('orbit')
+  );
 
-  hideAddSatellite = () => {
-    this.setState(state => ({
-      ...state,
-      addSatelliteVisible: false
-    }));
-  };
+  if (satellites.length >= MAX_SATELLITES) return;
 
-  render() {
-    const { label, color, size = 2, onClick } = this.props;
-    let foreground = '#FFFFFF';
-    if (color && color.r * 0.299 + color.g * 0.587 + color.b * 0.114 > 186) {
-      foreground = '#000000';
-    }
+  const nextOrbit = satellites[satellites.length - 1].attributes.orbit + 1;
 
-    const styles = {
-      backgroundColor: color
-        ? `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
-        : undefined,
-      boxShadow: color
-        ? `0 0 1rem rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
-        : undefined,
-      color: foreground
-    };
+  store.update(t =>
+    t.addRecord({
+      type: 'satellite',
+      attributes: {
+        label: `${nextOrbit}`,
+        orbit: nextOrbit
+      }
+    })
+  );
+};
 
-    return (
-      <div
-        id="planet"
-        className={cx('planet', `planet-${size}`)}
-        onClick={onClick}
-        onMouseOver={this.showAddSatellite}
-        onMouseOut={this.hideAddSatellite}
-        style={styles}
-      >
-        {label}
-      </div>
-    );
+const Planet = ({ label, color, size = 2, onClick }) => {
+  let foreground = '#FFFFFF';
+  if (color && color.r * 0.299 + color.g * 0.587 + color.b * 0.114 > 186) {
+    foreground = '#000000';
   }
-}
+
+  const styles = {
+    backgroundColor: color
+      ? `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+      : undefined,
+    boxShadow: color
+      ? `0 0 1rem rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+      : undefined,
+    color: foreground
+  };
+
+  return (
+    <div
+      id="planet"
+      className={cx('planet', `planet-${size}`)}
+      onClick={onClick}
+      style={styles}
+    >
+      <p className="planet-label">{label}</p>
+      <div className="add-button" onClick={onAddSatellite} />
+    </div>
+  );
+};
 
 Planet.displayName = displayName;
 Planet.propTypes = propTypes;

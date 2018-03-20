@@ -16,7 +16,35 @@ const propTypes = {
   size: PropTypes.oneOf([1, 2, 3])
 };
 
-const Satellite = ({ color, label, orbit = 1, size = 1 }) => {
+const pauseAnimation = (orbit, size) => () => {
+  Array.from(document.getElementsByClassName(`orbit-${orbit}`)).forEach(
+    orbit => {
+      orbit.style['animation-play-state'] = 'paused';
+    }
+  );
+
+  Array.from(
+    document.getElementsByClassName(`satellite-${orbit}-${size}`)
+  ).forEach(satellite => {
+    satellite.style['animation-play-state'] = 'paused';
+  });
+};
+
+const restartAnimation = (orbit, size) => () => {
+  Array.from(document.getElementsByClassName(`orbit-${orbit}`)).forEach(
+    orbit => {
+      orbit.style['animation-play-state'] = null;
+    }
+  );
+
+  Array.from(
+    document.getElementsByClassName(`satellite-${orbit}-${size}`)
+  ).forEach(satellite => {
+    satellite.style['animation-play-state'] = null;
+  });
+};
+
+const Satellite = ({ color, label, orbit = 1, size = 1, animating = true }) => {
   let foreground = '#FFFFFF';
   if (color && color.r * 0.299 + color.g * 0.587 + color.b * 0.114 > 186) {
     foreground = '#000000';
@@ -29,15 +57,18 @@ const Satellite = ({ color, label, orbit = 1, size = 1 }) => {
     boxShadow: color
       ? `0 0 1rem rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
       : undefined,
-    color: foreground
+    color: foreground,
+    animation: !animating ? 'none' : undefined
   };
 
   return (
     <div
       style={styles}
       className={cx('satellite', `satellite-${orbit}-${size}`)}
+      onMouseOver={pauseAnimation(orbit, size)}
+      onMouseLeave={restartAnimation(orbit, size)}
     >
-      {label}
+      <p className="satellite-label">{label}</p>
     </div>
   );
 };

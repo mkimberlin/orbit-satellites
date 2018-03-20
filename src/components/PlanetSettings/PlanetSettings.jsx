@@ -6,17 +6,16 @@ import './styles.module.css';
 
 const displayName = 'PlanetSettings';
 const propTypes = {
-  color: PropTypes.shape({
-    r: PropTypes.number,
-    g: PropTypes.number,
-    b: PropTypes.number,
-    a: PropTypes.number
+  planet: PropTypes.shape({
+    label: PropTypes.string,
+    color: PropTypes.shape({
+      r: PropTypes.number,
+      g: PropTypes.number,
+      b: PropTypes.number,
+      a: PropTypes.number
+    }),
+    size: PropTypes.oneOf([1, 2, 3])
   }),
-  position: PropTypes.shape({
-    x: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    y: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
-  }),
-  size: PropTypes.oneOf([1, 2, 3]),
   visible: PropTypes.bool,
   onClose: PropTypes.func
 };
@@ -43,10 +42,8 @@ const updateName = e => {
 };
 
 const PlanetSettings = ({
-  color,
-  label,
+  planet,
   position = {},
-  size = 2,
   visible = false,
   onClose
 }) => (
@@ -58,7 +55,12 @@ const PlanetSettings = ({
     <div className="settings-title">Planet Settings</div>
     <div className="setting">
       <label htmlFor="planet-name">Name:</label>
-      <input type="text" value={label} id="planet-name" onChange={updateName} />
+      <input
+        type="text"
+        value={planet.attributes.label}
+        id="planet-name"
+        onChange={updateName}
+      />
     </div>
     <div className="setting">
       <label htmlFor="planet-size">Size:</label>
@@ -66,13 +68,13 @@ const PlanetSettings = ({
         type="range"
         min="1"
         max="3"
-        value={size}
+        value={planet.attributes.size || 2}
         step="1"
         id="planet-size"
         onChange={updateSize}
       />
     </div>
-    <ChromePicker color={color} onChange={updateColor} />
+    <ChromePicker color={planet.attributes.color} onChange={updateColor} />
   </div>
 );
 

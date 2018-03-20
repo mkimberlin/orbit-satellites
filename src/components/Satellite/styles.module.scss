@@ -12,12 +12,27 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
+  .satellite-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
+
   @for $orbit from 1 through $max-orbits {
     @for $satellite-size from 1 through $object-sizes {
       &.satellite-#{$orbit}-#{$satellite-size} {
+        $orbit-size: $orbit-base + ($orbit * $orbit-step);
+        $satellite-computed-size: $satellite-size * $satellite-step;
+        $satellite-shift: ($orbit-size / 2) - ($satellite-computed-size / 2);
+
         width: $satellite-size * $satellite-step;
         height: $satellite-size * $satellite-step;
         line-height: $satellite-size * $satellite-step;
+        transform: translate(#{$satellite-shift})
+          rotateY(calc(#{$tilt-y} * -1))
+          rotateX(calc(#{$tilt-x} * -1));
+
         @include animation(
           calc(#{$speed-base} + (#{$speed-step} * #{$orbit - 1})),
           invert-orbit-#{$orbit}-#{$satellite-size}

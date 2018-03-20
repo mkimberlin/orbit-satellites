@@ -3,25 +3,39 @@
 exports[`Satellite component renders correctly with alternate props 1`] = `
 <div
   className="satellite satellite-2-3"
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
   style={
     Object {
+      "animation": undefined,
       "backgroundColor": "rgba(255, 205, 155, 0.5)",
       "boxShadow": "0 0 1rem rgba(255, 205, 155, 0.5)",
       "color": "#000000",
     }
   }
-/>
+>
+  <p
+    className="satellite-label"
+  />
+</div>
 `;
 
 exports[`Satellite component renders correctly with default props 1`] = `
 <div
   className="satellite satellite-1-1"
+  onMouseLeave={[Function]}
+  onMouseOver={[Function]}
   style={
     Object {
+      "animation": undefined,
       "backgroundColor": undefined,
       "boxShadow": undefined,
       "color": "#FFFFFF",
     }
   }
-/>
+>
+  <p
+    className="satellite-label"
+  />
+</div>
 `;

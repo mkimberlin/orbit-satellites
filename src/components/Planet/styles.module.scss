@@ -7,8 +7,6 @@
   position: absolute;
   border-radius: 50%;
   box-shadow: 0 0 1rem rgba($default-planet-color, 0.7);
-  overflow: hidden;
-  text-overflow: ellipsis;
 
   -webkit-transform: rotateY($tilt-y * -1) rotateX($tilt-x * -1);
   transform: rotateY($tilt-y * -1) rotateX($tilt-x * -1);
@@ -21,6 +19,36 @@
       line-height: $calculated-size;
       top: calc(50vh - (#{$calculated-size / 2}));
       left: calc(50vw - (#{$calculated-size / 2}));
+    }
+  }
+
+  .planet-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+  }
+
+  &:hover {
+    .add-button {
+      height: 14px;
+      line-height: 12px;
+      width: 14px;
+      background-color: green;
+      color: white;
+      border-radius: 50%;
+      border: 2px solid;
+      position: absolute;
+      top: 10%;
+      left: 80%;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:before {
+        content: '+';
+      }
     }
   }
 }

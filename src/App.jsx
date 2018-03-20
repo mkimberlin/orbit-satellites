@@ -16,8 +16,10 @@ class System extends Component {
   };
 
   openSettings = e => {
-    if (this.state.showPlanetSettings || this.state.showSatelliteSettings)
+    if (this.state.showPlanetSettings || this.state.showSatelliteSettings) {
+      this.closeSettings(e);
       return;
+    }
 
     const clientX = e.clientX;
     const clientY = e.clientY;
@@ -61,15 +63,19 @@ class System extends Component {
   };
 
   render() {
-    const { planets, satellites } = this.props;
+    const { planet, satellites } = this.props;
     return (
       <div>
         <div className="system-container" onClick={this.openSettings}>
+          <p className="instructions">
+            Click the planet to change its settings or anywhere else to change
+            satellite settings.
+          </p>
           <div className="system">
             <Planet
-              label={planets[0] && planets[0].attributes.label}
-              color={planets[0] && planets[0].attributes.color}
-              size={planets[0] && planets[0].attributes.size}
+              label={planet.attributes.label}
+              color={planet.attributes.color}
+              size={planet.attributes.size}
             />
             {satellites.map(satellite => (
               <Orbit
@@ -88,17 +94,12 @@ class System extends Component {
         </div>
         <SatelliteSettings
           visible={this.state.showSatelliteSettings}
-          label={satellites[0] && satellites[0].attributes.label}
-          color={satellites[0] && satellites[0].attributes.color}
-          size={satellites[0] && satellites[0].attributes.size}
           position={{ x: this.state.settingsX, y: this.state.settingsY }}
           onClose={this.closeSettings}
         />
         <PlanetSettings
+          planet={planet}
           visible={this.state.showPlanetSettings}
-          label={planets[0] && planets[0].attributes.label}
-          color={planets[0] && planets[0].attributes.color}
-          size={planets[0] && planets[0].attributes.size}
           position={{ x: this.state.settingsX, y: this.state.settingsY }}
           onClose={this.closeSettings}
         />
@@ -107,10 +108,16 @@ class System extends Component {
   }
 }
 
-const ConnectedSystem = withData(ownProps => ({
-  planets: q => q.findRecords('planet'),
-  satellites: q => q.findRecords('satellite')
-}))(System);
+const ConnectedSystem = withData(
+  {
+    planets: q => q.findRecords('planet'),
+    satellites: q => q.findRecords('satellite')
+  },
+  (recordProps, ownProps) => ({
+    planet: recordProps.planets[0] || { attributes: {} },
+    satellites: recordProps.satellites
+  })
+)(System);
 
 class App extends Component {
   render() {
