@@ -22,10 +22,7 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write",
-      "git add"
-    ]
+    "src/**/*.{js,jsx,json,css}": ["prettier --single-quote --write", "git add"]
   },
   "devDependencies": {
     "husky": "^0.14.3",
@@ -37,9 +34,9 @@
     "react-test-renderer": "^16.2.0"
   },
   "dependencies": {
-    "@orbit/core": "^0.15.10",
-    "@orbit/data": "^0.15.10",
-    "@orbit/store": "^0.15.10",
+    "@orbit/core": "^0.15.11",
+    "@orbit/data": "^0.15.11",
+    "@orbit/store": "^0.15.11",
     "classnames": "^2.2.5",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
@@ -53,10 +50,12 @@
     "copy-version": "node version.js",
     "build": "npm run build-css && npm run copy-version && react-scripts build",
     "coverage": "npm test -- --coverage",
-    "test": "npm run build-css && npm run copy-version && react-scripts test --env=jsdom",
+    "test":
+      "npm run build-css && npm run copy-version && react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "watch-css":
+      "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start"
   }
 }

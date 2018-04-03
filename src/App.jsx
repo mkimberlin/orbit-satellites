@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Orbit from './components/Orbit/Orbit';
 import Planet from './components/Planet/Planet';
 import Satellite from './components/Satellite/Satellite';
 import SatelliteSettings from './components/SatelliteSettings/SatelliteSettings';
@@ -9,7 +8,7 @@ import PlanetSettings from './components/PlanetSettings/PlanetSettings';
 
 class System extends Component {
   state = {
-    selectedOrbit: 1,
+    selectedSatellite: undefined,
     showSatelliteSettings: false,
     showPlanetSettings: false,
     settingsX: '50%',
@@ -27,14 +26,16 @@ class System extends Component {
     }));
   };
 
-  openSatelliteSettings = selectedOrbit => e => {
+  openSatelliteSettings = (satelliteId, e) => {
     if (!this.closeSettings(e)) {
       e.stopPropagation();
       this.setSettingsPosition(e);
 
       this.setState(state => ({
         ...state,
-        selectedOrbit,
+        selectedSatellite: this.props.satellites.find(
+          satellite => satellite.id === satelliteId
+        ),
         showSatelliteSettings: true
       }));
     }
@@ -70,7 +71,9 @@ class System extends Component {
   };
 
   isOverPlanet = (x, y) => {
-    const divRect = document.getElementById('planet').getBoundingClientRect();
+    const divRect = document
+      .getElementById(this.props.planet.id)
+      .getBoundingClientRect();
     return (
       x >= divRect.left &&
       x <= divRect.right &&
@@ -82,45 +85,39 @@ class System extends Component {
   render() {
     const { planet, satellites } = this.props;
     const {
-      selectedOrbit,
+      selectedSatellite,
       showPlanetSettings,
       showSatelliteSettings,
       settingsX,
       settingsY
     } = this.state;
 
-    const satellite = satellites.find(
-      satellite => satellite.attributes.orbit === selectedOrbit
-    );
-
     return (
       <div>
         <div className="system-container" onClick={this.openPlanetSettings}>
           <p className="instructions">
-            Click a planet or satellite to change its appearance, or add more
-            satellites.
+            Add additional satellites, or click a planet or satellite to change
+            its appearance.
           </p>
 
           <div className="system">
-            <Planet {...planet.attributes} onClick={this.openPlanetSettings} />
+            <Planet
+              id={planet.id}
+              {...planet.attributes}
+              onClick={this.openPlanetSettings}
+            />
 
-            {satellites.map(satellite => {
-              const { orbit } = satellite.attributes;
-
-              return (
-                <Orbit key={`orbit-${orbit}`} position={orbit}>
-                  <Satellite
-                    {...satellite.attributes}
-                    onClick={this.openSatelliteSettings(orbit)}
-                  />
-                </Orbit>
-              );
-            })}
+            {satellites.map(satellite => (
+              <Satellite
+                id={satellite.id}
+                onClick={this.openSatelliteSettings}
+              />
+            ))}
           </div>
         </div>
 
         <SatelliteSettings
-          satellite={satellite}
+          satellite={selectedSatellite}
           visible={showSatelliteSettings}
           position={{ x: settingsX, y: settingsY }}
           onClose={this.closeSettings}
@@ -142,7 +139,7 @@ const ConnectedSystem = withData(
     planets: q => q.findRecords('planet'),
     satellites: q => q.findRecords('satellite')
   },
-  (recordProps, ownProps) => ({
+  recordProps => ({
     planet: recordProps.planets[0] || { attributes: {} },
     satellites: recordProps.satellites
   })

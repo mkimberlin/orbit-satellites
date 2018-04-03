@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withData } from 'react-orbitjs';
 import cx from 'classnames';
 import './styles.module.css';
+import Orbit from '../Orbit/Orbit';
 
 const displayName = 'Satellite';
 const propTypes = {
+  id: PropTypes.string.isRequired,
   color: PropTypes.shape({
     r: PropTypes.number,
     g: PropTypes.number,
@@ -16,35 +19,25 @@ const propTypes = {
   size: PropTypes.oneOf([1, 2, 3])
 };
 
-const pauseAnimation = (orbit, size) => () => {
-  Array.from(document.getElementsByClassName(`orbit-${orbit}`)).forEach(
-    orbit => {
-      orbit.style['animation-play-state'] = 'paused';
-    }
-  );
-
-  Array.from(
-    document.getElementsByClassName(`satellite-${orbit}-${size}`)
-  ).forEach(satellite => {
-    satellite.style['animation-play-state'] = 'paused';
-  });
+const pauseAnimation = id => () => {
+  document.getElementById(`orbit-${id}`).style['animation-play-state'] =
+    'paused';
+  document.getElementById(id).style['animation-play-state'] = 'paused';
 };
 
-const restartAnimation = (orbit, size) => () => {
-  Array.from(document.getElementsByClassName(`orbit-${orbit}`)).forEach(
-    orbit => {
-      orbit.style['animation-play-state'] = null;
-    }
-  );
-
-  Array.from(
-    document.getElementsByClassName(`satellite-${orbit}-${size}`)
-  ).forEach(satellite => {
-    satellite.style['animation-play-state'] = null;
-  });
+const restartAnimation = id => () => {
+  document.getElementById(`orbit-${id}`).style['animation-play-state'] = null;
+  document.getElementById(id).style['animation-play-state'] = null;
 };
 
-const Satellite = ({ color, label, orbit = 1, size = 1, onClick }) => {
+export const Satellite = ({
+  id,
+  color,
+  label,
+  orbit = 1,
+  size = 1,
+  onClick
+}) => {
   let foreground = '#FFFFFF';
   if (color && color.r * 0.299 + color.g * 0.587 + color.b * 0.114 > 186) {
     foreground = '#000000';
@@ -60,20 +53,34 @@ const Satellite = ({ color, label, orbit = 1, size = 1, onClick }) => {
     color: foreground
   };
 
+  const onClickCallback = e => onClick(id, e);
+
   return (
-    <div
-      style={styles}
-      className={cx('satellite', `satellite-${orbit}-${size}`)}
-      onMouseOver={pauseAnimation(orbit, size)}
-      onMouseLeave={restartAnimation(orbit, size)}
-      onClick={onClick}
-    >
-      <p className="satellite-label">{label}</p>
-    </div>
+    <Orbit id={id} key={`orbit-${orbit}`} position={orbit}>
+      <div
+        id={id}
+        style={styles}
+        className={cx('satellite', `satellite-${orbit}-${size}`)}
+        onMouseOver={pauseAnimation(id)}
+        onMouseLeave={restartAnimation(id)}
+        onClick={onClickCallback}
+      >
+        <p className="satellite-label">{label}</p>
+      </div>
+    </Orbit>
   );
 };
 
 Satellite.displayName = displayName;
 Satellite.propTypes = propTypes;
 
-export default Satellite;
+export default withData(
+  ownProps => ({
+    satellite: q => q.findRecord({ type: 'satellite', id: ownProps.id })
+  }),
+  (recordProps, ownProps) => ({
+    id: recordProps.satellite.id,
+    onClick: ownProps.onClick,
+    ...recordProps.satellite.attributes
+  })
+)(Satellite);

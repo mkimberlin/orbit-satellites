@@ -3,6 +3,7 @@
 exports[`Orbit component renders correctly with alternate props 1`] = `
 <div
   className="orbit orbit-2"
+  id="orbit-test-id"
 >
   <div>
     Stuff
@@ -13,5 +14,6 @@ exports[`Orbit component renders correctly with alternate props 1`] = `
 exports[`Orbit component renders correctly with default props 1`] = `
 <div
   className="orbit orbit-1"
+  id="orbit-test-id"
 />
 `;

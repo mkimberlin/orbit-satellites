@@ -5,6 +5,7 @@ import './styles.module.css';
 
 const displayName = 'Orbit';
 const propTypes = {
+  id: PropTypes.string.isRequired,
   position: PropTypes.number,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -12,8 +13,10 @@ const propTypes = {
   ])
 };
 
-const Orbit = ({ children, position = 1 }) => (
-  <div className={cx('orbit', `orbit-${position}`)}>{children}</div>
+const Orbit = ({ id, children, position = 1 }) => (
+  <div id={`orbit-${id}`} className={cx('orbit', `orbit-${position}`)}>
+    {children}
+  </div>
 );
 
 Orbit.displayName = displayName;

@@ -6,6 +6,7 @@ import store from '../../store';
 
 const displayName = 'Planet';
 const propTypes = {
+  id: PropTypes.string.isRequired,
   label: PropTypes.string,
   color: PropTypes.shape({
     r: PropTypes.number,
@@ -14,7 +15,8 @@ const propTypes = {
     a: PropTypes.number
   }),
   size: PropTypes.oneOf([1, 2, 3]),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  ref: PropTypes.func
 };
 
 const MAX_SATELLITES = 10;
@@ -40,7 +42,7 @@ const onAddSatellite = e => {
   );
 };
 
-const Planet = ({ label, color, size = 2, onClick }) => {
+const Planet = ({ id, label, color, size = 2, onClick }) => {
   let foreground = '#FFFFFF';
   if (color && color.r * 0.299 + color.g * 0.587 + color.b * 0.114 > 186) {
     foreground = '#000000';
@@ -58,7 +60,7 @@ const Planet = ({ label, color, size = 2, onClick }) => {
 
   return (
     <div
-      id="planet"
+      id={id}
       className={cx('planet', `planet-${size}`)}
       onClick={onClick}
       style={styles}

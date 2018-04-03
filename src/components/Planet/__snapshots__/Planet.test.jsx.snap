@@ -3,7 +3,7 @@
 exports[`Planet component renders correctly with alternate props 1`] = `
 <div
   className="planet planet-3"
-  id="planet"
+  id="test-id"
   onClick={[Function]}
   style={
     Object {
@@ -28,7 +28,7 @@ exports[`Planet component renders correctly with alternate props 1`] = `
 exports[`Planet component renders correctly with default props 1`] = `
 <div
   className="planet planet-2"
-  id="planet"
+  id="test-id"
   onClick={undefined}
   style={
     Object {
